@@ -1,0 +1,31 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>There are errors:</h4>
+      <ul>
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :details %>
+    <%= form.text_area :details, rows: 5, class: "form-control" %>
+  </div>
+
+  <% if local_assigns[:show_completed] %>
+    <div class="form-check mb-3">
+      <%= form.check_box :completed, class: "form-check-input" %>
+      <%= form.label :completed, class: "form-check-label" %>
+    </div>
+  <% end %>
+
+  <%= form.submit class: "btn btn-primary" %>
+<% end %>
